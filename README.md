@@ -9,3 +9,5 @@ University of Southampton COMP6248 Differentiable Programming (and Deep Learning
 [Lab 2: Automatic Differentiation](lab_2)
 
 [Lab 3: Optimisation](lab_3)
+
+[Lab 4: Implementing simple Neural Networks using PyTorch and Torchbearer](lab_4)
