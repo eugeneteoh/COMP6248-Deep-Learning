@@ -1,4 +1,4 @@
-# COMP6248
+# COMP6248 Deep Learning
 
 University of Southampton [COMP6248 Differentiable Programming (and Deep Learning)](http://comp6248.ecs.soton.ac.uk/) 2020-2021 Labs and Exercises.
 
