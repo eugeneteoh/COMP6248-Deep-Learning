@@ -1,0 +1,181 @@
+\documentclass[10pt, twocolumn]{article}
+
+\makeatletter
+\renewcommand*{\fps@figure}{!htb}
+\renewcommand*{\fps@table}{!htb}
+\makeatother
+
+\usepackage{sectsty}
+\sectionfont{\fontsize{12}{11}\selectfont}
+\subsectionfont{\fontsize{11}{11}\selectfont}
+
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+ }
+\usepackage[utf8]{inputenc}
+\usepackage[hidelinks]{hyperref}
+\usepackage{amsmath, bm}
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage[parfill]{parskip}
+\usepackage{comment}
+\usepackage{subcaption}
+
+\usepackage{listings}
+\lstset{
+    language=Python,
+    breaklines=true,
+    breakatwhitespace=true,
+    basicstyle=\footnotesize,
+    frame=lines
+}
+\usepackage[capitalise, nameinlink]{cleveref}
+
+\usepackage[sorting=none, style=verbose]{biblatex}
+\addbibresource{lab_1.bib}
+
+\usepackage{titling}
+\setlength{\droptitle}{-2cm}
+
+\title{\Large COMP6248 Lab 1 Exercise -- Playing with gradients and matrices in PyTorch}
+\author{\Large Wei Chien Teoh (Eugene)\\\bigskip \href{mailto:wct1c16@soton.ac.uk}{wct1c16@soton.ac.uk}}
+\date{\large 9 April 2021}
+
+\begin{document}
+
+\maketitle
+
+\section*{Introduction}
+
+The code implementation is stored in a Github repository \footcite{github}. The results are seeded using \lstinline{torch.manual_seed(0)} to provide reproducible results.
+
+\section{Implement a matrix factorisation using gradient descent}
+
+\subsection{Implement gradient-based factorisation}
+
+\begin{lstlisting}
+from typing import Tuple
+import torch
+
+def sgd_factorise(A: torch.Tensor, rank: int, num_epochs=1000, lr=0.01) -> Tuple[torch.Tensor, torch.Tensor]:
+    m, n = A.shape
+    U = torch.rand((m, rank))
+    V = torch.rand((n, rank)) 
+
+    for epoch in range(num_epochs):
+        for r in range(m):
+            for c in range(n):
+                e = A[r, c] - (U[r] @ V[c].T)
+                U[r] += lr * e * V[c]
+                V[c] += lr * e * U[r]
+
+    return U, V
+\end{lstlisting}
+
+\subsection{Factorise and compute reconstruction error} \label{sec:reconstruction}
+
+\begin{align*}
+    \begin{split}
+    \hat{\pmb{U}} &= 
+    \begin{bmatrix}
+        0.6168 & -0.1530\\
+        0.4108 &  1.5961\\
+        1.0798 &  1.1800
+    \end{bmatrix},\\
+    \hat{\pmb{V}} &= 
+    \begin{bmatrix}
+        0.8126 &  1.8290\\
+        0.7836 & -0.2088\\
+        0.8384 & 1.0195
+    \end{bmatrix},\\
+    \text{Loss} &= 0.12197002023458481
+    \end{split}
+\end{align*}
+
+\section{Compare your result to truncated SVD}
+
+\subsection{Compare to the truncated-SVD}
+
+\begin{align*}
+    \begin{split}
+    \pmb{U}_t &=
+    \begin{bmatrix}
+        -0.0801 & -0.7448 &  0.6625\\
+        -0.7103 &  0.5090 &  0.4863\\
+        -0.6994 & -0.4316 & -0.5697
+    \end{bmatrix},\\
+    \pmb{S}_t &=
+    \begin{bmatrix}
+        5.3339 & 0.6959 & 0.0000
+    \end{bmatrix},\\
+    \pmb{V}_t &=
+    \begin{bmatrix}
+        -0.8349 &  0.2548 &  0.4879\\
+        -0.0851 & -0.9355 &  0.3430\\
+        -0.5439 & -0.2448 & -0.8027
+    \end{bmatrix},\\
+    \text{Loss} &= 0.12191088497638702
+    \end{split}
+\end{align*}
+
+The reconstruction loss of the truncated SVD is almost identical to the results in \cref{sec:reconstruction}. This is explained by the Eckart-Young-Mirsky theorem \footcite{eckart_approximation_1936}. The Eckart-Young-Mirsky theorem states that the singular value decomposition of a matrix $\pmb{D}$ can be approximated with subject to $rank(\pmb{D}) \leq r$. 
+
+\section{Matrix completion}
+
+\subsection{Implement masked factorisation}
+
+\begin{lstlisting}
+def sgd_factorise_masked(A: torch.Tensor, M: torch.Tensor, rank: int, num_epochs=1000, lr=0.01) -> Tuple[torch.Tensor, torch.Tensor]:
+    m, n = A.shape
+    U = torch.rand((m, rank))
+    V = torch.rand((n, rank)) 
+
+    for epoch in range(num_epochs):
+        for r in range(m):
+            for c in range(n):
+                if M[r, c]:
+                    e = A[r, c] - (U[r] @ V[c].T)
+                    U[r] += lr * e * V[c]
+                    V[c] += lr * e * U[r]
+
+    return U, V
+\end{lstlisting}
+
+\subsection{Reconstruct a matrix}
+
+\begin{align*}
+    \begin{split}
+    \hat{\pmb{U}} &=
+    \begin{bmatrix}
+        0.6501 & -0.1515\\
+        0.2346 &  1.2954\\
+        1.1472 & 1.2511
+    \end{bmatrix},\\
+    \hat{\pmb{V}} &=
+    \begin{bmatrix}
+        0.9019 &  1.5197\\
+        0.8868 & -0.1223\\
+        0.5406 &  1.3175
+    \end{bmatrix},\\
+    \hat{\pmb{A}} = \hat{\pmb{U}} \hat{\pmb{V}}^T &=
+    \begin{bmatrix}
+        0.3561 & 0.5951 & 0.1518\\
+        2.1802 & 0.0496 & 1.8334\\
+        2.9360 & 0.8643 & 2.2685
+    \end{bmatrix},\\
+    \text{Loss} &= 1.4483590126037598
+    \end{split}
+\end{align*}
+
+Although the matrix completion approximation of $\hat{\pmb{A}}$ is not identical with $\hat{\pmb{A}}$, the gradient descent-based approach of minimization provides reasonable results in the recovery of the missing values subject to rank $r$.
+
+% \printbibliography
+
+\end{document}
