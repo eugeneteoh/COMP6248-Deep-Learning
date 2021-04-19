@@ -6,8 +6,16 @@
 \makeatother
 
 \usepackage{sectsty}
-\sectionfont{\fontsize{12}{11}\selectfont}
-\subsectionfont{\fontsize{11}{11}\selectfont}
+\sectionfont{\fontsize{11}{11}\selectfont}
+\subsectionfont{\fontsize{10}{11}\selectfont}
+
+\usepackage[compact]{titlesec}
+\titlespacing{\section}{0pt}{2ex}{1ex}
+\titlespacing{\subsection}{0pt}{1ex}{1ex}
+\titlespacing{\subsubsection}{0pt}{0.5ex}{1ex}
+
+\setlength{\parskip}{0cm}
+\setlength{\parindent}{1em}
 
 \usepackage{geometry}
  \geometry{
@@ -45,8 +53,8 @@
 \setlength{\droptitle}{-1cm}
 
 \title{\Large COMP6248 Lab 1 Exercise -- Playing with gradients and matrices in PyTorch}
-\author{\Large Wei Chien Teoh (Eugene)\\\bigskip \href{mailto:wct1c16@soton.ac.uk}{wct1c16@soton.ac.uk}}
-\date{\large 9 April 2021}
+\author{\small Wei Chien Teoh (Eugene)\\\bigskip \href{mailto:wct1c16@soton.ac.uk}{wct1c16@soton.ac.uk}}
+\date{\small 9 April 2021}
 
 \begin{document}
 
