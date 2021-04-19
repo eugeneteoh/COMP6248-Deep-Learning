@@ -133,7 +133,7 @@ def sgd_factorise(A: torch.Tensor, rank: int, num_epochs=1000, lr=0.01) -> Tuple
     \end{split}
 \end{align*}
 
-The reconstruction loss of the truncated SVD is almost identical to the results in \cref{sec:reconstruction}. This is explained by the Eckart-Young-Mirsky theorem \footcite{eckart_approximation_1936}. The Eckart-Young-Mirsky theorem states that the singular value decomposition of a matrix $\pmb{D}$ can be approximated with subject to $rank(\pmb{D}) \leq r$. 
+The reconstruction loss of the truncated SVD is almost identical to the results in \cref{sec:reconstruction}. This is explained by the Eckart-Young-Mirsky theorem \footcite{eckart_approximation_1936}. The Eckart-Young-Mirsky theorem states that a matrix $\pmb{D}$ can be approximated with subject to $rank(\pmb{D}) \leq r$. The truncated SVD provides the optimal solution for the approximation.
 
 \section{Matrix completion}
 
