@@ -1,5 +1,8 @@
 \documentclass[10pt, twocolumn]{article}
 
+\usepackage{scrextend}
+\changefontsizes{8pt}
+
 \makeatletter
 \renewcommand*{\fps@figure}{!htb}
 \renewcommand*{\fps@table}{!htb}
@@ -54,7 +57,7 @@
 
 \title{\Large COMP6248 Lab 1 Exercise -- Playing with gradients and matrices in PyTorch}
 \author{\small Wei Chien Teoh (Eugene)\\\bigskip \href{mailto:wct1c16@soton.ac.uk}{wct1c16@soton.ac.uk}}
-\date{\small 9 April 2021}
+\date{\small 29 April 2021}
 
 \begin{document}
 
@@ -62,7 +65,7 @@
 
 \section*{Introduction}
 
-The code implementation is stored in a Github repository \footcite{github}. The results are seeded using \lstinline{torch.manual_seed(0)} to provide reproducible results.
+The results are seeded using \lstinline{torch.manual_seed(0)} to provide reproducible results.
 
 \section{Implement a matrix factorisation using gradient descent}
 
@@ -133,7 +136,7 @@ def sgd_factorise(A: torch.Tensor, rank: int, num_epochs=1000, lr=0.01) -> Tuple
     \end{split}
 \end{align*}
 
-The reconstruction loss of the truncated SVD is almost identical to the results in \cref{sec:reconstruction}. This is explained by the Eckart-Young-Mirsky theorem \footcite{eckart_approximation_1936}. The Eckart-Young-Mirsky theorem states that a matrix $\pmb{D}$ can be approximated with subject to $rank(\pmb{D}) \leq r$. The truncated SVD provides the optimal solution for the approximation.
+The reconstruction loss of the truncated SVD is almost identical to the results in \cref{sec:reconstruction}. This is explained by the Eckart-Young-Mirsky theorem \autocite{eckartApproximationOneMatrix1936}. The Eckart-Young-Mirsky theorem states that a matrix $\pmb{D}$ can be approximated with subject to $rank(\pmb{D}) \leq r$. The truncated SVD provides the optimal solution for the approximation.
 
 \section{Matrix completion}
 
