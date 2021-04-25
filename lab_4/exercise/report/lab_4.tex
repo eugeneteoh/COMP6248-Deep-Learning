@@ -78,7 +78,7 @@ The results are seeded using \lstinline{torch.manual_seed(0)} to provide reprodu
 
 By intuition, deep networks are better at generalising because it is able to learn features with increasing level of abstractions \autocite{eldanPowerDepthFeedforward2016}. Shallow and wide networks tend to memorise the structure of the features, thus causing them to have bad generalisation.
 
-As the width of the MLP increases, the model complexity increases, which allows the model to approximate functions of higher order. This is useful to learning the structure of the dataset. However, increasing model complexity comes with the cause of learning the structure of that particular dataset, hence will be unable to have good performance when unseen data of similar structure is given.
+As the width of the MLP increases, the model complexity increases, which allows the model to approximate functions of higher order. This is useful in learning the structure of the dataset, thus decreasing the training loss. However, increasing model complexity comes with the cause of learning the structure of that particular dataset, hence will be unable to have good performance when unseen data of similar structure is given. Such a phenomenon is seen in the divergence of test loss.
 
 
 
