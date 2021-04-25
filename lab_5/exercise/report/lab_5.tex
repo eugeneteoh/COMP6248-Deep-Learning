@@ -1,0 +1,73 @@
+\documentclass[twocolumn]{article}
+
+\usepackage{scrextend}
+\changefontsizes{8pt}
+
+\makeatletter
+\renewcommand*{\fps@figure}{!htb}
+\renewcommand*{\fps@table}{!htb}
+\makeatother
+
+\usepackage{sectsty}
+\sectionfont{\fontsize{11}{11}\selectfont}
+\subsectionfont{\fontsize{10}{11}\selectfont}
+
+% \usepackage[compact]{titlesec}
+% \titlespacing{\section}{0pt}{2ex}{1ex}
+% \titlespacing{\subsection}{0pt}{1ex}{1ex}
+% \titlespacing{\subsubsection}{0pt}{0.5ex}{1ex}
+
+\setlength{\parskip}{0cm}
+\setlength{\parindent}{1em}
+
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+ }
+\usepackage[utf8]{inputenc}
+\usepackage[hidelinks]{hyperref}
+\usepackage{amsmath, bm}
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage[parfill]{parskip}
+\usepackage{comment}
+\usepackage{subcaption}
+\usepackage{booktabs}
+
+
+
+\usepackage{listings}
+\lstset{
+    language=Python,
+    breaklines=true,
+    breakatwhitespace=true,
+    basicstyle=\footnotesize,
+    frame=lines
+}
+\usepackage[capitalise, nameinlink]{cleveref}
+
+\usepackage[sorting=none, style=verbose]{biblatex}
+\addbibresource{lab_5.bib}
+
+\usepackage{titling}
+\setlength{\droptitle}{-1cm}
+
+\title{\Large COMP6248 Lab 3 Exercise -- Optimise it!}
+\author{\small Wei Chien Teoh (Eugene)\\\bigskip \href{mailto:wct1c16@soton.ac.uk}{wct1c16@soton.ac.uk}}
+\date{\small 29 April 2021}
+
+\begin{document}
+
+\maketitle
+
+\section*{Introduction}
+
+The results are seeded using \lstinline{pytorch_lightning.utilities.seed.seed_everything(0)} to provide reproducible results.
+
+\end{document}
