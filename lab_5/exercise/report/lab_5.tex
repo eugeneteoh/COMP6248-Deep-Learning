@@ -92,7 +92,7 @@ Model 2 provides the worse performances for all train, validation and test loss.
 
 \subsection{Let's regress}
 
-Model 3 improves on previous models by adding two interleaved channels of equally spaced values ranging from -5 to 5. The third channel is the transpose/rotation of the second. The original data channel is sparse. The interleaved channels provide a form of data augmentation that allows the convolutional layers to better learn the structure of the original sparse data.
+Model 3 improves on previous models by adding two interleaved channels of equally spaced values ranging from -0.5 to 0.5. The third channel is the transpose/rotation of the second. The original data channel is sparse. The interleaved channels provide a form of data augmentation that allows the convolutional layers to better learn the structure of the original sparse data.
 
 By introducing the interleaved channels, Model 3 outperforms Model 2 in training loss and Model 1 in validation loss. It also significantly outperforms the previous models in test loss. Hence, it can be concluded that Model 3 provides the best generalisation out of all the models. The training time is reasonable relative to the previous models as the model complexity is similar to Model 2.
 
