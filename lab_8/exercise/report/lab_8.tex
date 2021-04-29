@@ -106,8 +106,8 @@ The results are seeded using \lstinline{pytorch_lightning.seed_everything(0)} to
 
 \subsection{Compare the latent spaces of the VAE and autoencoder}
 
-\cref{fig:latent-img} shows that VAE is able to learn latent representation of the data such as the structure of shirts, boots, pants, etc.
+\cref{fig:latent-img} shows that VAE is able to learn latent representations of the data such as the structure of shirts, boots, pants, etc. The VAE also attempts to learn orthogonal/uncorrelated structures because of the orthogonality (non-diagonals are zeros) imposed while learning the latent variance.
 
-\cref{fig:latent-img-2} rather shows that the autoencoder compresses the data into linear combination of latent representations, very much like how PCA works.
+\cref{fig:latent-img-2} rather shows that the autoencoder performs compression of the data into a smaller subspace, thus learning the most important latent features. It can be observed that the latent representations are composed of a linear combination of the structures such as shirts, boots, pants, etc.
 
 \end{document}
